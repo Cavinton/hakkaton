@@ -23,6 +23,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     
     def create(user, validated_data):
         user = User.objects.create_user(**validated_data)
-        send_activation_code(user.email, user.activation_code)
+        user.is_active = True
+        user.save()
+        # send_activation_code(user.email, user.activation_code)
         return user
-    

@@ -23,7 +23,6 @@ def decodeJWT(token):
     try:
         decoded = jwt.decode(token, SECRET_KEY, algorithms=ALGO)
         if decoded['expiry'] >= time.time():
-            #  если еще не истек срок токена
             return decoded 
         return {}
     except:
