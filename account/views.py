@@ -16,14 +16,25 @@ class RegisterView(APIView):
         serializer = RegisterSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-        return Response('ВЫ успешно зарегистрировались', 201)
-    
+        return Response('Вы успешно зарегистрировались', 201)
+
+# class RegisterView(APIView):
+#     @swagger_auto_schema(request_body=RegisterSerializer())
+#     def post(self, request):
+#         data = request.data
+#         serializer = RegisterSerializer(data=data)
+#         if serializer.is_valid(raise_exception=True):
+#             email = serializer.validated_data.get('email')
+#             if User.objects.filter(email=email).exists():
+#                 return Response('Пользователь с таким email уже зарегистрирован', status=400)
+#             serializer.save()
+#         return Response('Вы успешно зарегистрировались', status=201)
 
 class ActivationView(APIView):
     def get(self, request, email, activation_code):
         user = User.objects.filter(email=email, activation_code=activation_code).first()
         if not user:
-            return Response('Пользователь не найден', 494)
+            return Response('Пользователь не найден', 404)
         user.activation_code = ''
         user.is_active = True
         user.save()
