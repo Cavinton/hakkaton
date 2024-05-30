@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from datetime import timedelta
+import os
 from pathlib import Path
 from decouple import config
 
@@ -45,7 +46,9 @@ INSTALLED_APPS = [
     'django_filters',
 
     #apps
-    'account'
+    'account',
+    'shop',
+    'cart'
 ]
 
 MIDDLEWARE = [
@@ -59,8 +62,11 @@ MIDDLEWARE = [
 ]
 
 
+#сами добавили
 
 AUTH_USER_MODEL = 'account.User'
+
+# CART_SESSION_ID = 'cart'
 
 
 ROOT_URLCONF = 'config.urls'
@@ -68,7 +74,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
