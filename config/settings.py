@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['34.125.210.126']
 
 
 # Application definition
@@ -167,4 +167,16 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=700000),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
 }
+
+CORS_ALLOWD_ORIGINS = [
+    'localhost:3000'
+]
+
+# CORS_ALLOWD_METHODS = [
+#     'GET',
+#     'POST'
+# ]
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
